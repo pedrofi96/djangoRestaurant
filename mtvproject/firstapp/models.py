@@ -11,6 +11,4 @@ class Reservetion(models.Model):
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
     guess_count = models.IntegerField()
-    reservation_time = models.DateField(auto_now=True)
     comments = models.CharField(max_length=1000)
-
