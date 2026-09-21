@@ -10,9 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
@@ -75,11 +79,11 @@ WSGI_APPLICATION = 'mtvproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_db',
-        'USER':'root',
-        "PASSWORD":"1234",
-        'HOST':'127.0.0.1',
-        'PORT':'3306',
+        'NAME':os.environ.get('DB_NAME', 'django_db'),
+        'USER':os.environ.get('DB_USER', 'root'),
+        "PASSWORD":os.environ['DB_PASSWORD'],
+        'HOST':os.environ.get('DB_HOST', '127.0.0.1'),
+        'PORT':os.environ.get('DB_PORT', '3306'),
         'OPTIONS': {
             'init_command': "SET sql_mode='Strict_TRANS_TABLES'",
         }
